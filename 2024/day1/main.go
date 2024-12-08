@@ -60,8 +60,8 @@ func main() {
 		n = len(dest1)
 	}
 
-	fmt.Printf("Solution of Part1: %d\n", solvePart1(dest1, dest2, n))
-	fmt.Printf("Solution of Part2: %d\n", solvePart2(dest1, freqMap))
+	fmt.Printf("Solution of Day 1 Part 1: %d\n", solvePart1(dest1, dest2, n))
+	fmt.Printf("Solution of Day 1 Part 2: %d\n", solvePart2(dest1, freqMap))
 }
 
 func solvePart1(dest1 []int, dest2 []int, n int) int {
