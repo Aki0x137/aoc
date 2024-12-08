@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bufio"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -23,11 +24,12 @@ func NewTCReader(filepath string, delimiter string) (*TCReader, error) {
 	scanner := bufio.NewScanner(file)
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal("Error reading file:", err)
+		log.Fatalln("Error reading file:\n", err)
 		return nil, err
 	}
 
 	tcReader := &TCReader{
+		file:      file,
 		reader:    scanner,
 		delimiter: delimiter,
 	}
@@ -50,4 +52,12 @@ func (tcr *TCReader) Next() []string {
 func (tcr *TCReader) Scan() bool {
 	isReadable := tcr.reader.Scan()
 	return isReadable
+}
+
+func (tcr *TCReader) ReadEntireFile() []byte {
+	content, err := io.ReadAll(tcr.file)
+	if err != nil {
+		log.Fatalln("Error reading file:\n", err)
+	}
+	return content
 }
